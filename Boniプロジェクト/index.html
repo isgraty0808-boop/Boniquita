@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boniquita — handmade accessories</title>
+<meta name="description" content="ひとつひとつ手で紡ぐ、ささやかな宝飾。毎日に寄り添うハンドメイドアクセサリー Boniquita（ボニキータ）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Shippori+Mincho:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:    #f6ede0;
+  --cream-lt: #fdf7ef;
+  --cream-dk: #ecdcc8;
+  --red:      #7c1f1f;
+  --red-lt:   #a63030;
+  --ink:      #271810;
+  --mocha:    #6b4030;
+  --taupe:    #b5a090;
+  --line:     #d8c8b4;
+  --white:    #fffdf9;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Shippori Mincho', 'Cormorant Garamond', serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ─── TYPOGRAPHY ─── */
+.en { font-family: 'Cormorant Garamond', serif; }
+.label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--mocha);
+}
+.it { font-style: italic; }
+
+/* ─── HEADER ─── */
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(246,237,224,0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 72px;
+}
+nav ul { list-style: none; display: flex; gap: 24px; align-items: center; }
+nav.nav-left ul { justify-content: flex-start; }
+nav.nav-right ul { justify-content: flex-end; }
+nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+nav a:hover { border-bottom-color: var(--red); color: var(--red); }
+.nav-btn {
+  background: var(--ink); color: var(--cream-lt) !important;
+  border: none !important;
+  padding: 7px 16px;
+  font-size: 10px !important;
+  letter-spacing: 0.3em !important;
+  transition: background 0.2s !important;
+}
+.nav-btn:hover { background: var(--red) !important; }
+
+/* ladybug center logo */
+.header-logo {
+  display: flex; justify-content: center;
+  overflow: hidden; height: 56px; width: 56px; margin: 0 auto;
+}
+.header-logo img {
+  width: 56px; height: 56px;
+  object-fit: cover; object-position: center 62%;
+}
+
+/* ─── HAMBURGER BUTTON ─── */
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: none; border: none;
+  cursor: pointer; padding: 4px;
+  z-index: 310;
+  position: relative;
+}
+.menu-btn span {
+  display: block;
+  width: 100%; height: 1px;
+  background: var(--ink);
+  transition: transform 0.35s, opacity 0.35s;
+  transform-origin: center;
+}
+.menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-btn.open span:nth-child(2) { opacity: 0; }
+.menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ─── DRAWER MENU ─── */
+.drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(39,24,16,0.45);
+  z-index: 290;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+.drawer {
+  position: fixed;
+  top: 0; left: 0;
+  width: min(320px, 85vw);
+  height: 100vh;
+  background: var(--cream-lt);
+  z-index: 300;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  display: flex; flex-direction: column;
+  padding: 88px 40px 48px;
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+}
+.drawer.open { transform: translateX(0); }
+
+.drawer-logo {
+  position: absolute;
+  top: 18px; left: 40px;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.drawer-logo img {
+  width: 44px; height: 44px;
+  object-fit: contain;
+}
+.drawer-logo span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-style: italic;
+  color: var(--ink); letter-spacing: 0.06em;
+}
+
+.drawer-nav {
+  flex: 1;
+}
+.drawer-nav ul {
+  list-style: none;
+  display: flex; flex-direction: column;
+  gap: 0;
+}
+.drawer-nav li { border-bottom: 1px solid var(--line); }
+.drawer-nav a {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 18px 0;
+  transition: color 0.2s, padding-left 0.2s;
+}
+.drawer-nav a:hover { color: var(--red); padding-left: 6px; }
+
+.drawer-section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--taupe);
+  margin: 28px 0 8px;
+}
+
+.drawer-ext a {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--mocha);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s;
+}
+.drawer-ext a:hover { color: var(--red); }
+
+.drawer-shop-btn {
+  display: block;
+  margin-top: 32px;
+  background: var(--ink); color: var(--cream-lt) !important;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 14px;
+  transition: background 0.2s;
+  border: none;
+}
+.drawer-shop-btn:hover { background: var(--red) !important; }
+
+/* mobile nav */
+@media (max-width: 680px) {
+  .nav-inner {
+    grid-template-columns: 1fr auto 1fr;
+    padding: 0 20px;
+  }
+  .header-logo { width: 48px; height: 48px; }
+  .header-logo img { width: 48px; height: 48px; }
+  /* ハンバーガーを左端に */
+  .menu-btn { justify-self: start; }
+  /* 右ナビを右端に */
+  nav.nav-right { justify-self: end; }
+  nav.nav-right ul { gap: 12px; }
+  /* Instagramリンクを非表示、Shopボタンだけ残す */
+  nav.nav-right li:first-child { display: none; }
+  .nav-btn { padding: 6px 12px; font-size: 9px !important; }
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  padding: 120px 24px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('S__30564358.jpg');
+  background-size: cover; background-position: center 30%;
+  opacity: 0.50;
+}
+.hero-inner {
+  text-align: center;
+  max-width: 560px;
+}
+.hero-est { margin-bottom: 16px; }
+.hero-est .label { color: rgba(246,237,224,0.5); }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 300;
+  color: var(--cream-lt);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: #e8c8b0; }
+.hero-sub {
+  font-size: 13px; color: rgba(246,237,224,0.65);
+  line-height: 2; margin-bottom: 28px;
+  font-family: 'Shippori Mincho', serif;
+}
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  color: rgba(246,237,224,0.35);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  display: block;
+}
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  border: 1px solid rgba(246,237,224,0.6);
+  color: var(--cream-lt);
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+.btn:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
+.btn-dark {
+  background: var(--ink); color: var(--cream-lt);
+  border: 1px solid var(--ink);
+  padding: 12px 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.btn-dark:hover { background: var(--red); border-color: var(--red); }
+
+/* ─── SECTION COMMON ─── */
+.section { padding: 96px 32px; }
+.section-head { text-align: center; margin-bottom: 56px; }
+.section-head .label { display: block; margin-bottom: 14px; }
+.section-head h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.section-head p {
+  font-size: 14px; color: var(--mocha);
+  margin-top: 12px; line-height: 2;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+.rule {
+  width: 40px; height: 1px;
+  background: var(--taupe); margin: 18px auto 0;
+}
+
+/* ─── SHOP ─── */
+#shop { background: var(--cream-lt); }
+
+/* ─── カテゴリ・シリーズ タブ ─── */
+.cat-tabs {
+  display: flex; flex-wrap: wrap;
+  gap: 8px; justify-content: center;
+  margin-bottom: 16px;
+}
+.cat-tab {
+  background: none; border: 1px solid var(--line);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mocha); padding: 10px 24px;
+  cursor: pointer; transition: all 0.2s;
+}
+.cat-tab:hover { border-color: var(--red); color: var(--red); }
+.cat-tab.active {
+  background: var(--ink); border-color: var(--ink);
+  color: var(--cream-lt);
+}
+
+.series-row {
+  display: flex; flex-wrap: wrap;
+  gap: 6px; justify-content: center;
+  margin-bottom: 48px;
+  min-height: 36px;
+}
+.series-tab {
+  background: none; border: 1px solid var(--line);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--taupe); padding: 6px 14px;
+  cursor: pointer; transition: all 0.2s;
+}
+.series-tab:hover { border-color: var(--mocha); color: var(--mocha); }
+.series-tab.active {
+  background: var(--mocha); border-color: var(--mocha);
+  color: var(--cream-lt);
+}
+
+/* Product grid */
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px 24px;
+}
+@media (max-width: 1024px) { .products { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 720px)  { .products { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; } }
+@media (max-width: 440px)  { .products { grid-template-columns: 1fr 1fr; gap: 16px 10px; } }
+
+.product-card {
+  background: var(--white);
+  display: flex; flex-direction: column;
+  transition: transform 0.3s;
+}
+.product-card:hover { transform: translateY(-4px); }
+.product-card.hidden { display: none; }
+
+.card-img {
+  aspect-ratio: 1 / 1;
+  overflow: hidden; background: var(--cream-dk);
+  position: relative;
+}
+.card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.product-card:hover .card-img img { transform: scale(1.04); }
+
+.card-body {
+  padding: 16px 14px 18px;
+  flex: 1; display: flex; flex-direction: column;
+}
+.card-series {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--taupe);
+  margin-bottom: 6px;
+}
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 500;
+  color: var(--ink); line-height: 1.4;
+  margin-bottom: 4px;
+}
+.card-name-ja {
+  font-size: 11px; color: var(--mocha); margin-bottom: 10px;
+}
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; color: var(--red);
+  margin-top: auto; margin-bottom: 14px;
+}
+.card-btn {
+  display: block; width: 100%;
+  background: var(--ink); color: var(--cream-lt);
+  border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 10px; text-align: center;
+  transition: background 0.2s;
+}
+.card-btn:hover { background: var(--red); }
+
+/* explore more button */
+.explore-wrap {
+  text-align: center;
+  margin-top: 56px;
+}
+.explore-btn {
+  display: inline-block;
+  padding: 15px 52px;
+  border: 1px solid var(--ink);
+  background: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ink); cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  position: relative;
+}
+.explore-btn::after {
+  content: '';
+  position: absolute; bottom: -5px; right: -5px;
+  width: 100%; height: 100%;
+  border: 1px solid var(--line);
+  z-index: -1;
+  transition: bottom 0.2s, right 0.2s;
+}
+.explore-btn:hover { background: var(--ink); color: var(--cream-lt); }
+.explore-btn:hover::after { bottom: -2px; right: -2px; }
+
+/* ─── ABOUT ─── */
+#about { background: var(--cream); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 80px; align-items: center;
+}
+@media (max-width: 860px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+.about-portrait {
+  position: relative;
+}
+.about-portrait::before {
+  content: '';
+  position: absolute; top: 16px; left: 16px; right: -16px; bottom: -16px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+.about-portrait img {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; object-position: top;
+}
+.portrait-placeholder {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--cream-dk);
+  display: flex; align-items: center; justify-content: center;
+}
+.about-text .label { margin-bottom: 16px; }
+.about-text h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400; margin-bottom: 24px;
+}
+.about-text p {
+  font-size: 14px; color: var(--mocha);
+  line-height: 2.1; margin-bottom: 16px;
+}
+.signature {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-style: italic;
+  color: var(--red); margin-top: 28px;
+}
+
+/* ─── SNS ─── */
+#sns {
+  background: var(--ink);
+  padding: 96px 32px; text-align: center;
+}
+#sns .label { color: rgba(246,237,224,0.5); margin-bottom: 18px; display: block; }
+#sns h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 300; color: var(--cream-lt);
+  margin-bottom: 10px;
+}
+#sns p { font-size: 13px; color: rgba(246,237,224,0.55); margin-bottom: 44px; }
+
+.sns-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid rgba(246,237,224,0.15);
+}
+@media (max-width: 600px) {
+  .sns-links { grid-template-columns: repeat(2, 1fr); }
+}
+
+.sns-card {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  padding: 32px 16px;
+  background: rgba(246,237,224,0.03);
+  border: none;
+  outline: 1px solid rgba(246,237,224,0.1);
+  transition: background 0.25s;
+}
+.sns-card:hover {
+  background: rgba(124,31,31,0.18);
+}
+.sns-card .sns-icon {
+  width: 24px; height: 24px;
+  opacity: 0.65;
+  transition: opacity 0.2s, transform 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.sns-card .sns-icon img,
+.sns-card .sns-icon svg {
+  width: 24px; height: 24px;
+  display: block;
+}
+.sns-card:hover .sns-icon { opacity: 1; transform: scale(1.1); }
+.sns-card .sns-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.32em;
+  text-transform: uppercase; color: rgba(246,237,224,0.55);
+}
+.sns-card .sns-handle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-style: italic;
+  color: rgba(246,237,224,0.85);
+  letter-spacing: 0.02em;
+}
+
+/* ─── FAQ ─── */
+#faq { background: var(--cream); }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border-top: 1px solid var(--line);
+}
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  text-align: left;
+  gap: 16px;
+}
+.faq-q-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.7;
+}
+.faq-q-text span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--red);
+  font-style: italic;
+  margin-right: 10px;
+  letter-spacing: 0.05em;
+}
+.faq-icon {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: var(--taupe);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+  line-height: 1;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); color: var(--red); }
+.faq-answer {
+  display: none;
+  padding: 0 0 24px 0;
+}
+.faq-item.open .faq-answer { display: block; }
+.faq-answer p {
+  font-size: 14px;
+  color: var(--mocha);
+  line-height: 2.1;
+  padding-left: 24px;
+  border-left: 2px solid var(--line);
+}
+
+/* ─── CONTACT FORM ─── */
+#contact {
+  background: var(--cream-lt);
+  padding: 96px 32px;
+}
+#contact .section-head { margin-bottom: 52px; }
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.form-field {
+  margin-bottom: 32px;
+}
+.form-field label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 10px;
+}
+.form-field label .req { color: var(--red); margin-left: 3px; }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  font-family: 'Shippori Mincho', serif;
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.25s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--red);
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--line); }
+.form-field select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b5a090'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 20px;
+}
+.form-field textarea { resize: none; min-height: 120px; }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 560px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
+.form-submit {
+  text-align: center;
+  margin-top: 44px;
+}
+.form-submit button {
+  display: inline-block;
+  padding: 14px 56px;
+  background: var(--ink); color: var(--cream-lt);
+  border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+}
+.form-submit button:hover { background: var(--red); }
+.form-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; color: var(--taupe);
+  letter-spacing: 0.15em;
+  margin-top: 14px;
+}
+.form-thanks {
+  display: none;
+  text-align: center;
+  padding: 48px 0;
+}
+.form-thanks .thanks-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; color: var(--red);
+  display: block; margin-bottom: 16px;
+}
+.form-thanks h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 400;
+  color: var(--ink); margin-bottom: 10px;
+}
+.form-thanks p {
+  font-size: 13px; color: var(--mocha); line-height: 2;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--cream-dk);
+  border-top: 1px solid var(--line);
+  padding: 36px 32px;
+  display: flex; flex-wrap: wrap;
+  justify-content: space-between; align-items: center;
+  gap: 16px;
+}
+.footer-bug {
+  overflow: hidden; width: 48px; height: 48px;
+}
+.footer-bug img {
+  width: 48px; height: 48px;
+  object-fit: cover; object-position: center 62%;
+}
+footer .copy {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--taupe);
+}
+footer nav ul { gap: 20px; }
+footer nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--mocha);
+  border: none;
+}
+footer nav a:hover { color: var(--red); }
+
+@media (max-width: 600px) {
+  .section { padding: 72px 20px; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ DRAWER ════ -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <a href="#" class="drawer-logo" onclick="closeDrawer()">
+    <img src="boniquita-logo.png" alt="Boniquita">
+    <span>Boniquita</span>
+  </a>
+
+  <nav class="drawer-nav">
+    <p class="drawer-section-label">Menu</p>
+    <ul>
+      <li><a href="#shop" onclick="closeDrawer()">Shop</a></li>
+      <li><a href="#about" onclick="closeDrawer()">About</a></li>
+      <li><a href="#faq" onclick="closeDrawer()">FAQ</a></li>
+      <li><a href="#contact" onclick="closeDrawer()">Contact</a></li>
+      <li><a href="#sns" onclick="closeDrawer()">SNS</a></li>
+    </ul>
+
+    <p class="drawer-section-label">Shop</p>
+    <div class="drawer-ext">
+      <a href="https://boniquita.base.shop/" target="_blank" rel="noopener">BASE <span>↗</span></a>
+      <a href="https://minne.com/@prn08" target="_blank" rel="noopener">minne <span>↗</span></a>
+      <a href="https://jp.mercari.com/shops/profile/x5ET6XgwGSHjf4tDtkdXNB" target="_blank" rel="noopener">メルカリ <span>↗</span></a>
+      <a href="https://www.creema.jp/c/boniquita07/item/onsale" target="_blank" rel="noopener">Creema <span>↗</span></a>
+    </div>
+
+    <p class="drawer-section-label">SNS</p>
+    <div class="drawer-ext">
+      <a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
+      <a href="https://www.tiktok.com/@boniquita_07" target="_blank" rel="noopener">TikTok <span>↗</span></a>
+      <a href="https://www.threads.com/@boniquita_07" target="_blank" rel="noopener">Threads <span>↗</span></a>
+    </div>
+
+    <a href="links.html" class="drawer-shop-btn">すべてのリンク ↗</a>
+  </nav>
+</div>
+
+<!-- ════ HEADER ════ -->
+<header>
+  <div class="nav-inner">
+    <button class="menu-btn" id="menuBtn" onclick="toggleDrawer()" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="#" class="header-logo">
+      <img src="boniquita-logo.png" alt="Boniquita">
+    </a>
+
+    <nav class="nav-right">
+      <ul>
+        <li><a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://boniquita.base.shop/" target="_blank" rel="noopener" class="nav-btn">Shop ↗</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner" style="position:relative;z-index:1;">
+    <div class="hero-est">
+      <span class="label">Boniquita · Est. 2024</span>
+    </div>
+    <h1>Little <em>treasures</em><br>for everyday</h1>
+    <p class="hero-sub">
+      ひとつひとつ手で紡ぐ、ささやかな宝飾。<br>
+      古い記憶のように、そっと寄り添うアクセサリーをお届けします。
+    </p>
+    <span class="hero-tagline">handmade accessories · since 2024</span>
+    <a href="#shop" class="btn">Collection を見る</a>
+  </div>
+</section>
+
+<!-- ════ SHOP ════ -->
+<section class="section" id="shop">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Collection</span>
+      <h2>Shop</h2>
+      <p>すべての商品はハンドメイドの一点もの。<br>購入ボタンから BASE のショップページへ移動します。</p>
+      <div class="rule"></div>
+    </div>
+
+    <!-- Category filter -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-cat="all">All</button>
+      <button class="cat-tab" data-cat="earring">ピアス・イヤリング</button>
+      <button class="cat-tab" data-cat="necklace">ネックレス</button>
+      <button class="cat-tab" data-cat="ring">リング</button>
+      <button class="cat-tab" data-cat="other">その他グッズ</button>
+    </div>
+    <!-- Series filter (sub) -->
+    <div class="series-row" id="seriesRow"></div>
+
+    <!-- Product grid (JS rendered) -->
+    <div class="products" id="productGrid"></div>
+
+    <!-- Explore more -->
+    <div class="explore-wrap" id="exploreWrap">
+      <button class="explore-btn" onclick="exploreAll()">Show More</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ABOUT ════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-portrait">
+        <img src="hero.jpg" alt="sakura" onerror="this.style.display='none'">
+      </div>
+      <div class="about-text">
+        <span class="label">About the maker</span>
+        <h3>Hello, I'm <em>sakura</em>.</h3>
+        <p>
+          祖母の鏡台に並んでいた、古いブローチや真珠のネックレス。
+          幼い頃に見たそのきらめきが、いまも創作の原点です。
+        </p>
+        <p>
+          くすんだ色合いのビーズや、年月を重ねたような風合いの素材を選び、
+          ひとつひとつ手作業で組み上げています。
+          新しいのにどこか懐かしい、そんな日常の宝飾を目指して。
+        </p>
+        <p>
+          手元に届いた一品が、あなたにとっての
+          小さな思い出の品になりますように。
+        </p>
+        <p style="margin-top:8px; font-size:13px; color:var(--taupe);">
+          日常のこと、制作のこと —
+          <a href="https://www.instagram.com/prn____08/" target="_blank" rel="noopener"
+             style="border-bottom:1px solid var(--line); padding-bottom:1px;">
+            @prn____08
+          </a>
+        </p>
+        <div class="signature">— with love, sakura</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAQ ════ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">FAQ</span>
+      <h2>よくあるご質問</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>注文から届くまでどのくらいかかりますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>ご注文いただいてから通常3~5日で発送いたします。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>イヤリング・ピアスの変更はできますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>可能な作品と、デザイン上変更が難しい作品がございます。各商品ページに記載しておりますので、ご確認いただくか、お気軽にご相談ください。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>ギフト用のラッピングはできますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>専用のギフトラッピングのご用意はございませんが、Boniquitaでは梱包そのものもひとつの"体験"として大切にしています。そのままプレゼントとしてお渡しいただけるような仕上がりでお届けしておりますので、ご自身用はもちろん、大切な方への贈り物にもご利用いただけます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>返品・交換はできますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>ひとつひとつ大切にお届けしておりますが、万が一、商品に不備があった場合、返品・交換は可能です。不良品や誤配送がございました際には、商品到着後7日以内にご連絡ください。できる限り丁寧に対応させていただきます。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTACT ════ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Contact</span>
+      <h2>お問い合わせ</h2>
+      <p>オーダーメイドのご相談・商品へのご質問など、<br>お気軽にメッセージをお送りください。</p>
+      <div class="rule"></div>
+    </div>
+
+    <div class="contact-form">
+      <!-- ▼ FormspreeのIDを取得後、action属性の YOUR_FORM_ID を書き換えてください -->
+      <form id="contactForm" action="https://formspree.io/f/xdabkygp" method="POST">
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>お名前 <span class="req">*</span></label>
+            <input type="text" name="name" placeholder="山田 花子" required>
+          </div>
+          <div class="form-field">
+            <label>メールアドレス <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="hanako@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>お問い合わせ種別 <span class="req">*</span></label>
+          <select name="type" required>
+            <option value="">選択してください</option>
+            <option value="order">オーダーメイドのご相談</option>
+            <option value="product">商品についてのご質問</option>
+            <option value="restock">再販・在庫について</option>
+            <option value="collab">コラボ・お仕事のご依頼</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>メッセージ <span class="req">*</span></label>
+          <textarea name="message" placeholder="ご要望やご質問をご記入ください。&#10;オーダーメイドの場合は、ご希望のデザイン・色・予算などもお知らせいただけるとスムーズです。" required></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit">Send Message — 送信する</button>
+          <p class="form-note">通常 1〜3 営業日以内にご返信いたします</p>
+        </div>
+      </form>
+
+      <!-- 送信完了メッセージ -->
+      <div class="form-thanks" id="formThanks">
+        <span class="thanks-mark">✦</span>
+        <h3>Thank you for your message</h3>
+        <p>お問い合わせありがとうございます。<br>1〜3営業日以内にご返信いたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SNS ════ -->
+<section id="sns">
+  <span class="label">Find us</span>
+  <h2>Follow <em class="it">Boniquita</em></h2>
+  <p>新作情報・制作の様子はSNSで発信しています</p>
+  <a href="links.html" style="display:inline-block; margin-bottom:44px; font-family:'Inter',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(246,237,224,0.6); border:1px solid rgba(246,237,224,0.25); padding:10px 28px; transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(246,237,224,0.6)';this.style.color='rgba(246,237,224,0.9)'" onmouseout="this.style.borderColor='rgba(246,237,224,0.25)';this.style.color='rgba(246,237,224,0.6)'">すべてのリンクを見る ↗</a>
+
+  <div class="sns-links">
+    <a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener" class="sns-card">
+      <span class="sns-icon">
+        <!-- Instagram -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(246,237,224,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(246,237,224,0.9)" stroke="none"/></svg>
+      </span>
+      <span class="sns-name">Instagram</span>
+      <span class="sns-handle">@boniquita_07</span>
+    </a>
+    <a href="https://www.tiktok.com/@boniquita_07" target="_blank" rel="noopener" class="sns-card">
+      <span class="sns-icon">
+        <!-- TikTok -->
+        <svg viewBox="0 0 24 24" fill="rgba(246,237,224,0.9)"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+      </span>
+      <span class="sns-name">TikTok</span>
+      <span class="sns-handle">@boniquita_07</span>
+    </a>
+    <a href="https://boniquita.base.shop/" target="_blank" rel="noopener" class="sns-card">
+      <span class="sns-icon">
+        <!-- Shop bag -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(246,237,224,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </span>
+      <span class="sns-name">BASE Shop</span>
+      <span class="sns-handle">boniquita</span>
+    </a>
+    <a href="https://minne.com/@prn08" target="_blank" rel="noopener" class="sns-card">
+      <span class="sns-icon">
+        <!-- Minne: handcraft scissors -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(246,237,224,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+      </span>
+      <span class="sns-name">minne</span>
+      <span class="sns-handle">@prn08</span>
+    </a>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-bug">
+    <img src="boniquita-logo.png" alt="Boniquita">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://boniquita.base.shop/" target="_blank" rel="noopener">Base</a></li>
+      <li><a href="https://minne.com/@prn08" target="_blank" rel="noopener">minne</a></li>
+      <li><a href="links.html">Links</a></li>
+    </ul>
+  </nav>
+  <p class="copy">© 2026 Boniquita — all rights reserved</p>
+</footer>
+
+<script>
+const PRODUCTS = [
+  // Boniquita Café
+  { series:'Café', name:'Melon Cream Soda', ja:'メロンクリームソーダの耳飾り', price:4070,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/b8826681884be406f553acc9c41cc915.jpg',
+    url:'https://boniquita.base.shop/items/142231854' },
+  { series:'Café', name:'Classic Pudding', ja:'プリンの耳飾り', price:4070,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/3f3d98f72d31d50ce71376110d7dfdfa.jpg',
+    url:'https://boniquita.base.shop/items/142231715' },
+  { series:'Café', name:'Egg & Ham Sandwich', ja:'たまご＆ハムサンドの耳飾り', price:4070,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/fd0bcb30216d5a4e58e2ace20ed1ef38.jpg',
+    url:'https://boniquita.base.shop/items/142231511' },
+  { series:'Café', name:'Napolitan', ja:'ナポリタンの耳飾り', price:4070,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/fb0c7bc0bec270bb8452770f513d533a.jpg',
+    url:'https://boniquita.base.shop/items/142230875' },
+
+  // Little Dress Earrings
+  { series:'Little Dress', name:'rainbow after rain', ja:'レインボーアフターレイン', price:5280,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/2b33aec16b95684231c3dabd259f5586.jpg',
+    url:'https://boniquita.base.shop/items/138048926' },
+  { series:'Little Dress', name:'colorful garden', ja:'カラフルガーデン', price:5280,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/0fd1081552632df7b7b242e019436c76.jpg',
+    url:'https://boniquita.base.shop/items/138048812' },
+  { series:'Little Dress', name:'cherry ribbon', ja:'チェリーリボン', price:5280,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/38171124db3e60d8503563223d1316f3.jpg',
+    url:'https://boniquita.base.shop/items/138048738' },
+  { series:'Little Dress', name:'strawberry blossom', ja:'ストロベリーブロッサム', price:5280,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/754dcceef5e44e9e5a848ab42cda6a71.jpg',
+    url:'https://boniquita.base.shop/items/138048536' },
+
+  // Vintage Petal Parfait
+  { series:'Petal Parfait', name:'apricot garden', ja:'アプリコットガーデン', price:4290,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/ea277f748bb95015a3a41b2ee8d9cb06.jpg',
+    url:'https://boniquita.base.shop/items/136034835' },
+  { series:'Petal Parfait', name:'mint candy chocolat', ja:'ミントキャンディショコラ', price:4290,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/1611133deb72bd41a36c7e7774e2ced8.jpg',
+    url:'https://boniquita.base.shop/items/136033894' },
+  { series:'Petal Parfait', name:'cherry bonbon bloom', ja:'チェリーボンボンブルーム', price:4290,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/77cefbf05eb2a87884fdbac5bf9aac8b.jpg',
+    url:'https://boniquita.base.shop/items/136033507' },
+  { series:'Petal Parfait', name:'blue lemon meringue', ja:'ブルーレモンメレンゲ', price:4290,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/81097025a95a64dd6a332d6aea687303.jpg',
+    url:'https://boniquita.base.shop/items/136032201' },
+
+  // Méduse Fondante
+  { series:'Méduse', name:'bonbon pop', ja:'ボンボンポップ', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/b76194e588a7c7785cce9a96f91e2c47.jpg',
+    url:'https://boniquita.base.shop/items/132466230' },
+  { series:'Méduse', name:'jardin marin', ja:'ジャルダンマラン', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/055e53ed3f7d2107c572e00b67f9aab0.jpg',
+    url:'https://boniquita.base.shop/items/132466024' },
+  { series:'Méduse', name:'lait nacré', ja:'レナクレ', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/65722484dc1d54c6231cc4e76f1699e2.jpg',
+    url:'https://boniquita.base.shop/items/132465921' },
+  { series:'Méduse', name:'fraise mille-feuille', ja:'フレーズミルフィーユ', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/78e797151f591a88542164368053e808.jpg',
+    url:'https://boniquita.base.shop/items/132465542' },
+  { series:'Méduse', name:'coucher de soleil', ja:'クシェドソレイユ', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/f283a45a1bd02b091539492d38d393f0.jpg',
+    url:'https://boniquita.base.shop/items/132465389' },
+  { series:'Méduse', name:'bleu lagon', ja:'ブルーラゴン', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/d151623859e662525d7808c446426392.jpg',
+    url:'https://boniquita.base.shop/items/132465258' },
+  { series:'Méduse', name:'mer calme', ja:'メールカルム', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/5f843bcfe7e3841a9784bd5878a9a7be.jpg',
+    url:'https://boniquita.base.shop/items/132465734' },
+  { series:'Méduse', name:'fête colorée', ja:'フェートコロレ', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/aea68b8c5813973e598cbfffd02c2552.jpg',
+    url:'https://boniquita.base.shop/items/132466620' },
+  { series:'Méduse', name:'rêve textile', ja:'レーブテキスタイル', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/43839ff9668547c5a7325834b0d404d3.jpg',
+    url:'https://boniquita.base.shop/items/132466428' },
+
+  // Méduse Fondante（追加）
+  { series:'Méduse', name:'pêche fondante', ja:'ペッシュフォンダント', price:3850,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/2cc22672a9af458993c6a2e21d67a935.jpg',
+    url:'https://boniquita.base.shop/items/132466769' },
+
+  // Bloom Parade
+  { series:'Bloom Parade', name:'rêve pastel', ja:'レーブパステル', price:5280,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/65722484dc1d54c6231cc4e76f1699e2.jpg',
+    url:'https://boniquita.base.shop/items/124580431' },
+  { series:'Bloom Parade', name:'soleil', ja:'ソレイユ', price:5280,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/06dd0170567513d0b711db409bdb8640.jpg',
+    url:'https://boniquita.base.shop/items/124580385', soldout:true },
+
+  // Candy Planet（ブレスレット）
+  { series:'Candy Planet', name:'milky', ja:'ミルキー', price:3080,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/51d17707d8b770474fcacebe1235d058.jpg',
+    url:'https://boniquita.base.shop/items/127780687' },
+  { series:'Candy Planet', name:'pop', ja:'ポップ', price:3080,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/3ba2bb2520a374ea3a957fa069b1e9d2.jpg',
+    url:'https://boniquita.base.shop/items/127780570', soldout:true },
+
+  // Necklace
+  { series:'Necklace', name:'Little Planet / globe', ja:'リトルプラネット グローブ', price:4620,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/68d5bbc9544ca7da4e5cfa2c73525a1f.jpg',
+    url:'https://boniquita.base.shop/items/127389201' },
+  { series:'Necklace', name:'Little Planet / angel', ja:'リトルプラネット エンジェル', price:4620,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/f8b1a1d8966ba8e1cf08fea13962bfa9.jpg',
+    url:'https://boniquita.base.shop/items/127388804' },
+  { series:'Necklace', name:'vintage button necklace / vintage', ja:'ヴィンテージボタンネックレス', price:4180,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/9ac4e016c7dcec80ce2d9ae2cde5642b.jpg',
+    url:'https://boniquita.base.shop/items/124463283' },
+  { series:'Necklace', name:'vintage button necklace / verdigris', ja:'ヴィンテージボタンネックレス', price:4180,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/62ff6a4cc9ed16c8651ed5e7a139a46e.jpg',
+    url:'https://boniquita.base.shop/items/124463229' },
+  { series:'Necklace', name:'vintage button necklace / white', ja:'ヴィンテージボタンネックレス', price:4180,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/d6f216dd640e2b6b6e2b5904d93e9f37.jpg',
+    url:'https://boniquita.base.shop/items/124463148' },
+
+  // Ring
+  { series:'Ring', name:'vintage button ring / cherry', ja:'ヴィンテージボタンリング', price:2420,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/a5c5953e390d702eba23e9860e60fd9e.jpg',
+    url:'https://boniquita.base.shop/items/102409841', soldout:true },
+  { series:'Ring', name:'vintage button ring / fried egg', ja:'ヴィンテージボタンリング', price:3300,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/198723defc715c701b8f1292ce5e6f6c.jpg',
+    url:'https://boniquita.base.shop/items/102409790' },
+  { series:'Ring', name:'vintage cabochon ring / lady bug', ja:'ヴィンテージカボションリング', price:2420,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/c69ca678ca67be8cf346ecfca17fc04d.jpg',
+    url:'https://boniquita.base.shop/items/102409739' },
+  { series:'Ring', name:'vintage button ring / amber sugar', ja:'ヴィンテージボタンリング', price:2420,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/8ef0e0c0eb2e1e49a5825c1e4e485b27.jpg',
+    url:'https://boniquita.base.shop/items/102409671' },
+  { series:'Ring', name:'vintage button ring / Pomegranate', ja:'ヴィンテージボタンリング', price:2860,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/5073e1b68174ed484e3747da237eef13.jpg',
+    url:'https://boniquita.base.shop/items/102409591' },
+  { series:'Ring', name:'vintage cabochon ring / vermilion red', ja:'ヴィンテージカボションリング', price:2420,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/988459e66c310f9df1bc5f47e9f36e30.jpg',
+    url:'https://boniquita.base.shop/items/102409525' },
+  { series:'Ring', name:'vintage button ring / yellowpoppy', ja:'ヴィンテージボタンリング', price:1760,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/bf8abf25c20023d26298f9edc2407508.jpg',
+    url:'https://boniquita.base.shop/items/102320764' },
+  { series:'Ring', name:'vintage button ring / sugar', ja:'ヴィンテージボタンリング', price:2750,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/855ee4942339bad19b2472b86168e657.jpg',
+    url:'https://boniquita.base.shop/items/102320418' },
+
+  // Original Goods
+  { series:'Goods', name:'Little Charm Case / ss size', ja:'リトルチャームケース', price:770,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/af31cf25cfb0c44c4e83079cd9671051.jpg',
+    url:'https://boniquita.base.shop/items/124462211' },
+  { series:'Goods', name:'Little Charm Label / original sticker', ja:'リトルチャームラベル', price:330,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/6619dd98e33625f7d4ac4ae48b2a78d8.jpg',
+    url:'https://boniquita.base.shop/items/124462514' },
+];
+
+// カテゴリ → シリーズ 対応表
+const CATEGORIES = {
+  earring: [
+    { key:'Café',         label:'Boniquita Café' },
+    { key:'Little Dress', label:'Little Dress' },
+    { key:'Petal Parfait',label:'Vintage Petal Parfait' },
+    { key:'Méduse',       label:'Méduse Fondante' },
+    { key:'Bloom Parade', label:'Bloom Parade' },
+  ],
+  necklace: [
+    { key:'Necklace', label:'Necklace' },
+  ],
+  ring: [
+    { key:'Ring', label:'Ring' },
+  ],
+  other: [
+    { key:'Candy Planet', label:'Candy Planet' },
+    { key:'Goods',        label:'Original Goods' },
+  ],
+};
+
+const INITIAL_COUNT = 8;
+let currentCat = 'all';
+let currentSeries = 'all';
+
+function getFilteredList() {
+  const available = PRODUCTS.filter(p => !p.soldout);
+  if (currentCat === 'all') return available;
+  const seriesKeys = CATEGORIES[currentCat].map(s => s.key);
+  if (currentSeries !== 'all') return available.filter(p => p.series === currentSeries);
+  return available.filter(p => seriesKeys.includes(p.series));
+}
+
+function renderSeriesTabs(cat) {
+  const row = document.getElementById('seriesRow');
+  row.innerHTML = '';
+  if (cat === 'all') return;
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'series-tab active';
+  allBtn.textContent = 'All';
+  allBtn.addEventListener('click', () => {
+    currentSeries = 'all';
+    document.querySelectorAll('.series-tab').forEach(b => b.classList.remove('active'));
+    allBtn.classList.add('active');
+    renderProducts();
+  });
+  row.appendChild(allBtn);
+
+  CATEGORIES[cat].forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'series-tab';
+    btn.textContent = s.label;
+    btn.addEventListener('click', () => {
+      currentSeries = s.key;
+      document.querySelectorAll('.series-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts();
+    });
+    row.appendChild(btn);
+  });
+}
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  const wrap = document.getElementById('exploreWrap');
+  grid.innerHTML = '';
+
+  const list = getFilteredList();
+  list.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'product-card' + (i >= INITIAL_COUNT ? ' hidden' : '');
+    card.innerHTML = `
+      <div class="card-img">
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+      </div>
+      <div class="card-body">
+        <div class="card-series">${p.series}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-name-ja">${p.ja}</div>
+        <div class="card-price">¥ ${p.price.toLocaleString('ja-JP')}</div>
+        <a href="${p.url}" target="_blank" rel="noopener" class="card-btn">購入する — Base ↗</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  if (wrap) wrap.style.display = list.length > INITIAL_COUNT ? 'block' : 'none';
+}
+
+function exploreAll() {
+  const hidden = [...document.querySelectorAll('.product-card.hidden')];
+  hidden.slice(0, 8).forEach(c => c.classList.remove('hidden'));
+  if (hidden.length <= 8) {
+    document.getElementById('exploreWrap').style.display = 'none';
+  }
+}
+
+// 大カテゴリのクリック
+document.querySelectorAll('.cat-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    currentSeries = 'all';
+    renderSeriesTabs(currentCat);
+    renderProducts();
+  });
+});
+
+renderProducts();
+</script>
+</body>
+</html>

@@ -379,6 +379,162 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
   font-size: 15px; color: rgba(246,237,224,0.9);
 }
 
+/* ─── FAQ ─── */
+#faq { background: var(--cream); }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border-top: 1px solid var(--line);
+}
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  text-align: left;
+  gap: 16px;
+}
+.faq-q-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.7;
+}
+.faq-q-text span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--red);
+  font-style: italic;
+  margin-right: 10px;
+  letter-spacing: 0.05em;
+}
+.faq-icon {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: var(--taupe);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+  line-height: 1;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); color: var(--red); }
+.faq-answer {
+  display: none;
+  padding: 0 0 24px 0;
+}
+.faq-item.open .faq-answer { display: block; }
+.faq-answer p {
+  font-size: 14px;
+  color: var(--mocha);
+  line-height: 2.1;
+  padding-left: 24px;
+  border-left: 2px solid var(--line);
+}
+
+/* ─── CONTACT FORM ─── */
+#contact {
+  background: var(--cream-lt);
+  padding: 96px 32px;
+}
+#contact .section-head { margin-bottom: 52px; }
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.form-field {
+  margin-bottom: 32px;
+}
+.form-field label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 10px;
+}
+.form-field label .req { color: var(--red); margin-left: 3px; }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  font-family: 'Shippori Mincho', serif;
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.25s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--red);
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--line); }
+.form-field select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b5a090'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 20px;
+}
+.form-field textarea { resize: none; min-height: 120px; }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 560px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
+.form-submit {
+  text-align: center;
+  margin-top: 44px;
+}
+.form-submit button {
+  display: inline-block;
+  padding: 14px 56px;
+  background: var(--ink); color: var(--cream-lt);
+  border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+}
+.form-submit button:hover { background: var(--red); }
+.form-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; color: var(--taupe);
+  letter-spacing: 0.15em;
+  margin-top: 14px;
+}
+.form-thanks {
+  display: none;
+  text-align: center;
+  padding: 48px 0;
+}
+.form-thanks .thanks-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; color: var(--red);
+  display: block; margin-bottom: 16px;
+}
+.form-thanks h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 400;
+  color: var(--ink); margin-bottom: 10px;
+}
+.form-thanks p {
+  font-size: 13px; color: var(--mocha); line-height: 2;
+}
+
 /* ─── FOOTER ─── */
 footer {
   background: var(--cream-dk);
@@ -424,7 +580,8 @@ footer nav a:hover { color: var(--red); }
       <ul>
         <li><a href="#shop">Shop</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#sns">Contact</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
@@ -525,11 +682,126 @@ footer nav a:hover { color: var(--red); }
   </div>
 </section>
 
+<!-- ════ FAQ ════ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">FAQ</span>
+      <h2>よくあるご質問</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>注文から届くまでどのくらいかかりますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>ご注文いただいてから通常3〜5日で発送いたします。発送後は追跡番号をお知らせします。お急ぎの場合はお気軽にご相談ください。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>イヤリング・ピアスの変更はできますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>変更可能な作品と、デザイン上難しいものがございます。各商品ページに記載しておりますので、ご確認ください。記載のない場合もお気軽にご相談いただけます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>ギフト用のラッピングはできますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>専用のギフトラッピングはご用意しておりませんが、梱包はそのままプレゼントとしてお渡しいただけるような丁寧な仕上がりでお届けしております。大切な方へのプレゼントにもぜひご利用ください。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span>Q.</span>返品・交換はできますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>不良品や誤配送の場合は対応させていただきます。商品到着後7日以内にご連絡ください。お客様都合による返品・交換はお受けしておりませんので、ご了承ください。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTACT ════ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Contact</span>
+      <h2>お問い合わせ</h2>
+      <p>オーダーメイドのご相談・商品へのご質問など、<br>お気軽にメッセージをお送りください。</p>
+      <div class="rule"></div>
+    </div>
+
+    <div class="contact-form">
+      <!-- ▼ FormspreeのIDを取得後、action属性の YOUR_FORM_ID を書き換えてください -->
+      <form id="contactForm" action="https://formspree.io/f/xdabkygp" method="POST">
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>お名前 <span class="req">*</span></label>
+            <input type="text" name="name" placeholder="山田 花子" required>
+          </div>
+          <div class="form-field">
+            <label>メールアドレス <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="hanako@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>お問い合わせ種別 <span class="req">*</span></label>
+          <select name="type" required>
+            <option value="">選択してください</option>
+            <option value="order">オーダーメイドのご相談</option>
+            <option value="product">商品についてのご質問</option>
+            <option value="restock">再販・在庫について</option>
+            <option value="collab">コラボ・お仕事のご依頼</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>メッセージ <span class="req">*</span></label>
+          <textarea name="message" placeholder="ご要望やご質問をご記入ください。&#10;オーダーメイドの場合は、ご希望のデザイン・色・予算などもお知らせいただけるとスムーズです。" required></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit">Send Message — 送信する</button>
+          <p class="form-note">通常 1〜3 営業日以内にご返信いたします</p>
+        </div>
+      </form>
+
+      <!-- 送信完了メッセージ -->
+      <div class="form-thanks" id="formThanks">
+        <span class="thanks-mark">✦</span>
+        <h3>Thank you for your message</h3>
+        <p>お問い合わせありがとうございます。<br>1〜3営業日以内にご返信いたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════ SNS ════ -->
 <section id="sns">
   <span class="label">Find us</span>
   <h2>Follow <em class="it">Boniquita</em></h2>
   <p>新作情報・制作の様子はSNSで発信しています</p>
+  <a href="links.html" style="display:inline-block; margin-bottom:44px; font-family:'Inter',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(246,237,224,0.6); border:1px solid rgba(246,237,224,0.25); padding:10px 28px; transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(246,237,224,0.6)';this.style.color='rgba(246,237,224,0.9)'" onmouseout="this.style.borderColor='rgba(246,237,224,0.25)';this.style.color='rgba(246,237,224,0.6)'">すべてのリンクを見る ↗</a>
+
   <div class="sns-links">
     <a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener" class="sns-card">
       <span class="sns-icon">📷</span>
@@ -566,6 +838,7 @@ footer nav a:hover { color: var(--red); }
       <li><a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="https://boniquita.base.shop/" target="_blank" rel="noopener">Base</a></li>
       <li><a href="https://minne.com/@prn08" target="_blank" rel="noopener">minne</a></li>
+      <li><a href="links.html">Links</a></li>
     </ul>
   </nav>
   <p class="copy">© 2026 Boniquita — all rights reserved</p>
@@ -673,6 +946,42 @@ function renderProducts(filter) {
 }
 
 renderProducts('all');
+
+// FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Contact form
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = contactForm.querySelector('button[type="submit"]');
+    btn.textContent = '送信中…';
+    btn.disabled = true;
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        contactForm.style.display = 'none';
+        document.getElementById('formThanks').style.display = 'block';
+      } else {
+        btn.textContent = '送信に失敗しました。再度お試しください。';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = '送信に失敗しました。再度お試しください。';
+      btn.disabled = false;
+    }
+  });
+}
 
 document.querySelectorAll('.series-tab').forEach(btn => {
   btn.addEventListener('click', () => {

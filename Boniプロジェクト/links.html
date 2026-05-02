@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boniquita — Links</title>
+  <meta name="description" content="Boniquita（ボニキータ）のリンク一覧">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Shippori+Mincho:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --cream:    #f6ede0;
+  --cream-lt: #fdf7ef;
+  --cream-dk: #ecdcc8;
+  --red:      #7c1f1f;
+  --red-lt:   #a63030;
+  --ink:      #271810;
+  --mocha:    #6b4030;
+  --taupe:    #b5a090;
+  --line:     #d8c8b4;
+  --white:    #fffdf9;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Shippori Mincho', serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 24px 80px;
+}
+
+/* ─── プロフィール ─── */
+.profile {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 20px;
+  border: 1px solid var(--line);
+  background: var(--cream-dk);
+}
+
+.profile-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.profile-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.profile-desc {
+  font-size: 12px;
+  color: var(--mocha);
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+}
+
+.profile-rule {
+  width: 32px;
+  height: 1px;
+  background: var(--taupe);
+  margin: 16px auto 0;
+}
+
+/* ─── リンクリスト ─── */
+.links {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  position: relative;
+}
+
+.link-card:hover {
+  border-color: var(--red);
+  background: var(--cream-lt);
+  transform: translateY(-2px);
+}
+
+.link-icon {
+  font-size: 20px;
+  width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.link-body {
+  flex: 1;
+}
+
+.link-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.link-sub {
+  font-size: 11px;
+  color: var(--taupe);
+  letter-spacing: 0.05em;
+}
+
+.link-arrow {
+  font-size: 14px;
+  color: var(--taupe);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.link-card:hover .link-arrow {
+  color: var(--red);
+}
+
+/* 目立たせたいカード */
+.link-card.featured {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.link-card.featured .link-title,
+.link-card.featured .link-arrow {
+  color: var(--cream-lt);
+}
+
+.link-card.featured .link-sub {
+  color: var(--taupe);
+}
+
+.link-card.featured:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+/* ─── セクション区切り ─── */
+.links-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  text-align: center;
+  margin: 8px 0 4px;
+}
+
+/* ─── フッター ─── */
+.links-footer {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.links-footer a {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+
+.links-footer a:hover { color: var(--red); }
+  </style>
+</head>
+<body>
+
+  <!-- プロフィール -->
+  <div class="profile">
+    <div class="profile-logo">
+      <img src="boniquita-logo.png" alt="Boniquita">
+    </div>
+    <p class="profile-name">Boniquita</p>
+    <p class="profile-desc">
+      ひとつひとつ手で紡ぐ、ささやかな宝飾。<br>
+      handmade accessories by sakura
+    </p>
+    <div class="profile-rule"></div>
+  </div>
+
+  <!-- リンク -->
+  <div class="links">
+
+    <!-- ショップ -->
+    <p class="links-label">Shop</p>
+
+    <a href="https://boniquita.base.shop/" target="_blank" rel="noopener" class="link-card featured">
+      <span class="link-icon">🛍</span>
+      <div class="link-body">
+        <span class="link-title">BASE Shop</span>
+        <span class="link-sub">boniquita.base.shop</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="https://minne.com/@prn08" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">✦</span>
+      <div class="link-body">
+        <span class="link-title">minne</span>
+        <span class="link-sub">@prn08</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="https://jp.mercari.com/shops/profile/x5ET6XgwGSHjf4tDtkdXNB?source=shared_link&utm_source=shared_link" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🛒</span>
+      <div class="link-body">
+        <span class="link-title">メルカリ</span>
+        <span class="link-sub">Mercari Shop</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="https://www.creema.jp/c/boniquita07/item/onsale" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🎨</span>
+      <div class="link-body">
+        <span class="link-title">Creema</span>
+        <span class="link-sub">boniquita07</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <!-- SNS -->
+    <p class="links-label">SNS</p>
+
+    <a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">📷</span>
+      <div class="link-body">
+        <span class="link-title">Instagram</span>
+        <span class="link-sub">@boniquita_07</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="https://www.tiktok.com/@boniquita_07" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">▶</span>
+      <div class="link-body">
+        <span class="link-title">TikTok</span>
+        <span class="link-sub">@boniquita_07</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="https://www.threads.com/@boniquita_07?igshid=NTc4MTIwNjQ2YQ%3D%3D" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🧵</span>
+      <div class="link-body">
+        <span class="link-title">Threads</span>
+        <span class="link-sub">@boniquita_07</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <!-- ホームページ -->
+    <p class="links-label">Website</p>
+
+    <a href="https://isgraty0808-boop.github.io/Boniquita/" target="_blank" rel="noopener" class="link-card featured">
+      <span class="link-icon">🌸</span>
+      <div class="link-body">
+        <span class="link-title">Official Website</span>
+        <span class="link-sub">boniquita — handmade accessories</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="https://isgraty0808-boop.github.io/Boniquita/#contact" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">✉</span>
+      <div class="link-body">
+        <span class="link-title">お問い合わせ</span>
+        <span class="link-sub">オーダーメイド・ご質問</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <div class="links-footer">
+    <a href="https://isgraty0808-boop.github.io/Boniquita/">Boniquita © 2026</a>
+  </div>
+
+</body>
+</html>

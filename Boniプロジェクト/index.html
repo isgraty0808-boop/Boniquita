@@ -96,9 +96,127 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
   object-fit: cover; object-position: center 62%;
 }
 
+/* ─── HAMBURGER BUTTON ─── */
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: none; border: none;
+  cursor: pointer; padding: 4px;
+  z-index: 310;
+  position: relative;
+}
+.menu-btn span {
+  display: block;
+  width: 100%; height: 1px;
+  background: var(--ink);
+  transition: transform 0.35s, opacity 0.35s;
+  transform-origin: center;
+}
+.menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-btn.open span:nth-child(2) { opacity: 0; }
+.menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ─── DRAWER MENU ─── */
+.drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(39,24,16,0.45);
+  z-index: 290;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+.drawer {
+  position: fixed;
+  top: 0; left: 0;
+  width: min(320px, 85vw);
+  height: 100vh;
+  background: var(--cream-lt);
+  z-index: 300;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  display: flex; flex-direction: column;
+  padding: 88px 40px 48px;
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+}
+.drawer.open { transform: translateX(0); }
+
+.drawer-logo {
+  position: absolute;
+  top: 18px; left: 40px;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.drawer-logo img {
+  width: 44px; height: 44px;
+  object-fit: contain;
+}
+.drawer-logo span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-style: italic;
+  color: var(--ink); letter-spacing: 0.06em;
+}
+
+.drawer-nav {
+  flex: 1;
+}
+.drawer-nav ul {
+  list-style: none;
+  display: flex; flex-direction: column;
+  gap: 0;
+}
+.drawer-nav li { border-bottom: 1px solid var(--line); }
+.drawer-nav a {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 18px 0;
+  transition: color 0.2s, padding-left 0.2s;
+}
+.drawer-nav a:hover { color: var(--red); padding-left: 6px; }
+
+.drawer-section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--taupe);
+  margin: 28px 0 8px;
+}
+
+.drawer-ext a {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--mocha);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s;
+}
+.drawer-ext a:hover { color: var(--red); }
+
+.drawer-shop-btn {
+  display: block;
+  margin-top: 32px;
+  background: var(--ink); color: var(--cream-lt) !important;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 14px;
+  transition: background 0.2s;
+  border: none;
+}
+.drawer-shop-btn:hover { background: var(--red) !important; }
+
 /* mobile nav */
 @media (max-width: 680px) {
-  .nav-inner { grid-template-columns: 1fr auto; padding: 0 20px; }
+  .nav-inner { grid-template-columns: auto 1fr auto; padding: 0 20px; }
   nav.nav-left { display: none; }
   .header-logo { width: 48px; height: 48px; }
   .header-logo img { width: 48px; height: 48px; }
@@ -352,31 +470,54 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
   margin-bottom: 10px;
 }
 #sns p { font-size: 13px; color: rgba(246,237,224,0.55); margin-bottom: 44px; }
+
 .sns-links {
-  display: flex; flex-wrap: wrap;
-  gap: 16px; justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid rgba(246,237,224,0.15);
 }
+@media (max-width: 600px) {
+  .sns-links { grid-template-columns: repeat(2, 1fr); }
+}
+
 .sns-card {
-  border: 1px solid rgba(246,237,224,0.2);
-  padding: 22px 36px;
   display: flex; flex-direction: column;
-  align-items: center; gap: 10px;
-  min-width: 160px;
-  transition: border-color 0.2s, background 0.2s;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  padding: 32px 16px;
+  background: rgba(246,237,224,0.03);
+  border: none;
+  outline: 1px solid rgba(246,237,224,0.1);
+  transition: background 0.25s;
 }
 .sns-card:hover {
-  border-color: var(--red-lt);
-  background: rgba(124,31,31,0.12);
+  background: rgba(124,31,31,0.18);
 }
-.sns-card .sns-icon { font-size: 22px; opacity: 0.7; }
+.sns-card .sns-icon {
+  width: 24px; height: 24px;
+  opacity: 0.65;
+  transition: opacity 0.2s, transform 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.sns-card .sns-icon img,
+.sns-card .sns-icon svg {
+  width: 24px; height: 24px;
+  display: block;
+}
+.sns-card:hover .sns-icon { opacity: 1; transform: scale(1.1); }
 .sns-card .sns-name {
   font-family: 'Inter', sans-serif;
-  font-size: 10px; letter-spacing: 0.3em;
-  text-transform: uppercase; color: rgba(246,237,224,0.7);
+  font-size: 9px; letter-spacing: 0.32em;
+  text-transform: uppercase; color: rgba(246,237,224,0.55);
 }
 .sns-card .sns-handle {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 15px; color: rgba(246,237,224,0.9);
+  font-size: 14px; font-style: italic;
+  color: rgba(246,237,224,0.85);
+  letter-spacing: 0.02em;
 }
 
 /* ─── FAQ ─── */
@@ -573,17 +714,49 @@ footer nav a:hover { color: var(--red); }
 </head>
 <body>
 
+<!-- ════ DRAWER ════ -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <a href="#" class="drawer-logo" onclick="closeDrawer()">
+    <img src="boniquita-logo.png" alt="Boniquita">
+    <span>Boniquita</span>
+  </a>
+
+  <nav class="drawer-nav">
+    <p class="drawer-section-label">Menu</p>
+    <ul>
+      <li><a href="#shop" onclick="closeDrawer()">Shop</a></li>
+      <li><a href="#about" onclick="closeDrawer()">About</a></li>
+      <li><a href="#faq" onclick="closeDrawer()">FAQ</a></li>
+      <li><a href="#contact" onclick="closeDrawer()">Contact</a></li>
+      <li><a href="#sns" onclick="closeDrawer()">SNS</a></li>
+    </ul>
+
+    <p class="drawer-section-label">Shop</p>
+    <div class="drawer-ext">
+      <a href="https://boniquita.base.shop/" target="_blank" rel="noopener">BASE <span>↗</span></a>
+      <a href="https://minne.com/@prn08" target="_blank" rel="noopener">minne <span>↗</span></a>
+      <a href="https://jp.mercari.com/shops/profile/x5ET6XgwGSHjf4tDtkdXNB" target="_blank" rel="noopener">メルカリ <span>↗</span></a>
+      <a href="https://www.creema.jp/c/boniquita07/item/onsale" target="_blank" rel="noopener">Creema <span>↗</span></a>
+    </div>
+
+    <p class="drawer-section-label">SNS</p>
+    <div class="drawer-ext">
+      <a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
+      <a href="https://www.tiktok.com/@boniquita_07" target="_blank" rel="noopener">TikTok <span>↗</span></a>
+      <a href="https://www.threads.com/@boniquita_07" target="_blank" rel="noopener">Threads <span>↗</span></a>
+    </div>
+
+    <a href="links.html" class="drawer-shop-btn">すべてのリンク ↗</a>
+  </nav>
+</div>
+
 <!-- ════ HEADER ════ -->
 <header>
   <div class="nav-inner">
-    <nav class="nav-left">
-      <ul>
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <button class="menu-btn" id="menuBtn" onclick="toggleDrawer()" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
 
     <a href="#" class="header-logo">
       <img src="boniquita-logo.png" alt="Boniquita">
@@ -699,7 +872,7 @@ footer nav a:hover { color: var(--red); }
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          <p>ご注文いただいてから通常3〜5日で発送いたします。発送後は追跡番号をお知らせします。お急ぎの場合はお気軽にご相談ください。</p>
+          <p>ご注文いただいてから通常3~5日で発送いたします。</p>
         </div>
       </div>
 
@@ -709,7 +882,7 @@ footer nav a:hover { color: var(--red); }
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          <p>変更可能な作品と、デザイン上難しいものがございます。各商品ページに記載しておりますので、ご確認ください。記載のない場合もお気軽にご相談いただけます。</p>
+          <p>可能な作品と、デザイン上変更が難しい作品がございます。各商品ページに記載しておりますので、ご確認いただくか、お気軽にご相談ください。</p>
         </div>
       </div>
 
@@ -719,7 +892,7 @@ footer nav a:hover { color: var(--red); }
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          <p>専用のギフトラッピングはご用意しておりませんが、梱包はそのままプレゼントとしてお渡しいただけるような丁寧な仕上がりでお届けしております。大切な方へのプレゼントにもぜひご利用ください。</p>
+          <p>専用のギフトラッピングのご用意はございませんが、Boniquitaでは梱包そのものもひとつの"体験"として大切にしています。そのままプレゼントとしてお渡しいただけるような仕上がりでお届けしておりますので、ご自身用はもちろん、大切な方への贈り物にもご利用いただけます。</p>
         </div>
       </div>
 
@@ -729,7 +902,7 @@ footer nav a:hover { color: var(--red); }
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          <p>不良品や誤配送の場合は対応させていただきます。商品到着後7日以内にご連絡ください。お客様都合による返品・交換はお受けしておりませんので、ご了承ください。</p>
+          <p>ひとつひとつ大切にお届けしておりますが、万が一、商品に不備があった場合、返品・交換は可能です。不良品や誤配送がございました際には、商品到着後7日以内にご連絡ください。できる限り丁寧に対応させていただきます。</p>
         </div>
       </div>
 
@@ -804,22 +977,34 @@ footer nav a:hover { color: var(--red); }
 
   <div class="sns-links">
     <a href="https://www.instagram.com/boniquita_07/" target="_blank" rel="noopener" class="sns-card">
-      <span class="sns-icon">📷</span>
+      <span class="sns-icon">
+        <!-- Instagram -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(246,237,224,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(246,237,224,0.9)" stroke="none"/></svg>
+      </span>
       <span class="sns-name">Instagram</span>
       <span class="sns-handle">@boniquita_07</span>
     </a>
     <a href="https://www.tiktok.com/@boniquita_07" target="_blank" rel="noopener" class="sns-card">
-      <span class="sns-icon">▶</span>
+      <span class="sns-icon">
+        <!-- TikTok -->
+        <svg viewBox="0 0 24 24" fill="rgba(246,237,224,0.9)"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+      </span>
       <span class="sns-name">TikTok</span>
       <span class="sns-handle">@boniquita_07</span>
     </a>
     <a href="https://boniquita.base.shop/" target="_blank" rel="noopener" class="sns-card">
-      <span class="sns-icon">🛍</span>
+      <span class="sns-icon">
+        <!-- Shop bag -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(246,237,224,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </span>
       <span class="sns-name">BASE Shop</span>
       <span class="sns-handle">boniquita</span>
     </a>
     <a href="https://minne.com/@prn08" target="_blank" rel="noopener" class="sns-card">
-      <span class="sns-icon">✦</span>
+      <span class="sns-icon">
+        <!-- Minne: handcraft scissors -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(246,237,224,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+      </span>
       <span class="sns-name">minne</span>
       <span class="sns-handle">@prn08</span>
     </a>
@@ -946,6 +1131,25 @@ function renderProducts(filter) {
 }
 
 renderProducts('all');
+
+// Drawer menu
+function toggleDrawer() {
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('drawerOverlay');
+  const btn = document.getElementById('menuBtn');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  overlay.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
 // FAQ accordion
 function toggleFaq(btn) {

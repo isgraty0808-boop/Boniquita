@@ -1330,6 +1330,26 @@ document.querySelectorAll('.cat-tab').forEach(btn => {
 });
 
 renderProducts();
+
+// ─── ドロワー（ハンバーガーメニュー） ───
+function toggleDrawer() {
+  document.getElementById('drawer').classList.toggle('open');
+  document.getElementById('drawerOverlay').classList.toggle('open');
+  document.getElementById('menuBtn').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('drawer').classList.contains('open') ? 'hidden' : '';
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ─── FAQ アコーディオン ───
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  item.classList.toggle('open');
+}
 </script>
 </body>
 </html>

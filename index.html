@@ -383,9 +383,11 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
 .product-card.hidden { display: none; }
 
 .card-img {
+  display: block;
   aspect-ratio: 1 / 1;
   overflow: hidden; background: var(--cream-dk);
   position: relative;
+  cursor: pointer;
 }
 .card-img img {
   width: 100%; height: 100%;
@@ -742,7 +744,14 @@ footer .copy {
   font-size: 10px; letter-spacing: 0.2em;
   color: var(--taupe);
 }
-footer nav ul { gap: 20px; }
+footer nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 20px;
+  list-style: none;
+  padding: 0; margin: 0;
+}
 footer nav a {
   font-family: 'Inter', sans-serif;
   font-size: 10px; letter-spacing: 0.2em;
@@ -753,7 +762,72 @@ footer nav a:hover { color: var(--red); }
 
 @media (max-width: 600px) {
   .section { padding: 72px 20px; }
-  footer { flex-direction: column; text-align: center; }
+  footer { flex-direction: column; align-items: center; text-align: center; }
+  footer nav ul { gap: 10px 16px; }
+}
+
+/* ─── アニメーション ─── */
+
+/* ヒーロー：ロード時にふわっと */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-est    { animation: heroFadeUp 0.9s ease both; animation-delay: 0.1s; }
+.hero h1     { animation: heroFadeUp 1.0s ease both; animation-delay: 0.35s; }
+.hero-sub    { animation: heroFadeUp 1.0s ease both; animation-delay: 0.6s; }
+.hero-tagline{ animation: heroFadeUp 1.0s ease both; animation-delay: 0.8s; }
+.hero .btn   { animation: heroFadeUp 1.0s ease both; animation-delay: 1.0s; }
+
+/* スクロール：フェードイン */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 商品カード：少しずつ遅らせて出現 */
+.product-card {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.product-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-card.hidden {
+  display: none;
+}
+
+/* ライン演出 */
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.section-head .label {
+  display: inline-block;
+  position: relative;
+}
+.section-head .label::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--taupe);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s ease 0.3s;
+}
+.section-head.visible .label::after {
+  transform: scaleX(1);
 }
 </style>
 </head>
@@ -836,7 +910,7 @@ footer nav a:hover { color: var(--red); }
 <!-- ════ SHOP ════ -->
 <section class="section" id="shop">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head fade-up">
       <span class="label">Collection</span>
       <h2>Shop</h2>
       <p>すべての商品はハンドメイドの一点もの。<br>購入ボタンから BASE のショップページへ移動します。</p>
@@ -867,7 +941,7 @@ footer nav a:hover { color: var(--red); }
 <!-- ════ ABOUT ════ -->
 <section class="section" id="about">
   <div class="container">
-    <div class="about-grid">
+    <div class="about-grid fade-up">
       <div class="about-portrait">
         <img src="hero.jpg" alt="sakura" onerror="this.style.display='none'">
       </div>
@@ -903,13 +977,13 @@ footer nav a:hover { color: var(--red); }
 <!-- ════ FAQ ════ -->
 <section class="section" id="faq">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head fade-up">
       <span class="label">FAQ</span>
       <h2>よくあるご質問</h2>
       <div class="rule"></div>
     </div>
 
-    <div class="faq-list">
+    <div class="faq-list fade-up" style="transition-delay:0.15s">
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
@@ -958,7 +1032,7 @@ footer nav a:hover { color: var(--red); }
 <!-- ════ CONTACT ════ -->
 <section class="section" id="contact">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head fade-up">
       <span class="label">Contact</span>
       <h2>お問い合わせ</h2>
       <p>オーダーメイドのご相談・商品へのご質問など、<br>お気軽にメッセージをお送りください。</p>
@@ -1076,6 +1150,20 @@ footer nav a:hover { color: var(--red); }
 
 <script>
 const PRODUCTS = [
+  // Spice & Sugar Records
+  { series:'Spice Records', name:'Minty Groove', ja:'ミンティグルーブ', price:2530,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/21c3bcfb6430ec41d4d55c889a789b83.jpg',
+    url:'https://boniquita.base.shop/items/142781951' },
+  { series:'Spice Records', name:'Silent Bloom', ja:'サイレントブルーム', price:2530,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/fdca53c2b9f8c09cddfc600341632cc8.jpg',
+    url:'https://boniquita.base.shop/items/142781605' },
+  { series:'Spice Records', name:'Rosy Nostalgia', ja:'ロージーノスタルジア', price:2530,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/82620fb6157f40d0993424ae49a663af.jpg',
+    url:'https://boniquita.base.shop/items/142781501' },
+  { series:'Spice Records', name:'Bubblegum Melody', ja:'バブルガムメロディー', price:2530,
+    img:'https://baseec-img-mng.akamaized.net/images/item/origin/d493feb2d156c61ee3d9899303fa9fc4.jpg',
+    url:'https://boniquita.base.shop/items/142778175' },
+
   // Boniquita Café
   { series:'Café', name:'Melon Cream Soda', ja:'メロンクリームソーダの耳飾り', price:4070,
     img:'https://baseec-img-mng.akamaized.net/images/item/origin/b8826681884be406f553acc9c41cc915.jpg',
@@ -1223,11 +1311,12 @@ const PRODUCTS = [
 // カテゴリ → シリーズ 対応表
 const CATEGORIES = {
   earring: [
-    { key:'Café',         label:'Boniquita Café' },
-    { key:'Little Dress', label:'Little Dress' },
-    { key:'Petal Parfait',label:'Vintage Petal Parfait' },
-    { key:'Méduse',       label:'Méduse Fondante' },
-    { key:'Bloom Parade', label:'Bloom Parade' },
+    { key:'Café',          label:'Boniquita Café' },
+    { key:'Little Dress',  label:'Little Dress' },
+    { key:'Petal Parfait', label:'Vintage Petal Parfait' },
+    { key:'Méduse',        label:'Méduse Fondante' },
+    { key:'Bloom Parade',  label:'Bloom Parade' },
+    { key:'Spice Records', label:'Spice & Sugar Records' },
   ],
   necklace: [
     { key:'Necklace', label:'Necklace' },
@@ -1293,9 +1382,9 @@ function renderProducts() {
     const card = document.createElement('div');
     card.className = 'product-card' + (i >= INITIAL_COUNT ? ' hidden' : '');
     card.innerHTML = `
-      <div class="card-img">
+      <a href="${p.url}" target="_blank" rel="noopener" class="card-img">
         <img src="${p.img}" alt="${p.name}" loading="lazy">
-      </div>
+      </a>
       <div class="card-body">
         <div class="card-series">${p.series}</div>
         <div class="card-name">${p.name}</div>
@@ -1307,6 +1396,7 @@ function renderProducts() {
   });
 
   if (wrap) wrap.style.display = list.length > INITIAL_COUNT ? 'block' : 'none';
+  observeCards();
 }
 
 function exploreAll() {
@@ -1328,6 +1418,26 @@ document.querySelectorAll('.cat-tab').forEach(btn => {
     renderProducts();
   });
 });
+
+// ─── スクロールアニメーション ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// 商品カード用Observer（renderProductsの後に再設定）
+function observeCards() {
+  document.querySelectorAll('.product-card:not(.hidden)').forEach((card, i) => {
+    card.style.transitionDelay = (i % 8 * 0.07) + 's';
+    observer.observe(card);
+  });
+}
 
 renderProducts();
 

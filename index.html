@@ -345,6 +345,18 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
   background: var(--ink); border-color: var(--ink);
   color: var(--cream-lt);
 }
+.cat-tab[data-cat="new"] {
+  border-color: var(--red); color: var(--red);
+  position: relative;
+}
+.cat-tab[data-cat="new"]::before {
+  content: '★ ';
+  font-size: 9px;
+}
+.cat-tab[data-cat="new"].active {
+  background: var(--red); border-color: var(--red);
+  color: var(--cream-lt);
+}
 
 .series-row {
   display: flex; flex-wrap: wrap;
@@ -397,6 +409,20 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
   transition: transform 0.5s ease;
 }
 .product-card:hover .card-img img { transform: scale(1.04); }
+.card-new-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  border: 1px solid var(--red);
+  color: var(--red);
+  background: rgba(253,247,239,0.92);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  padding: 5px 14px;
+  pointer-events: none;
+  z-index: 1;
+}
 
 .card-body {
   padding: 16px 14px 18px;
@@ -922,6 +948,7 @@ footer nav a:hover { color: var(--red); }
     <!-- Category filter -->
     <div class="cat-tabs">
       <button class="cat-tab active" data-cat="all">All</button>
+      <button class="cat-tab" data-cat="new">New</button>
       <button class="cat-tab" data-cat="earring">ピアス・イヤリング</button>
       <button class="cat-tab" data-cat="necklace">ネックレス</button>
       <button class="cat-tab" data-cat="ring">リング</button>
@@ -1153,16 +1180,16 @@ footer nav a:hover { color: var(--red); }
 <script>
 const PRODUCTS = [
   // Spice & Sugar Records
-  { series:'Spice Records', name:'Minty Groove', ja:'ミンティグルーブ', price:2530,
+  { series:'Spice Records', name:'Minty Groove', ja:'ミンティグルーブ', price:2530, pickup: true,
     img:'https://baseec-img-mng.akamaized.net/images/item/origin/21c3bcfb6430ec41d4d55c889a789b83.jpg',
     url:'https://boniquita.base.shop/items/142781951' },
-  { series:'Spice Records', name:'Silent Bloom', ja:'サイレントブルーム', price:2530,
+  { series:'Spice Records', name:'Silent Bloom', ja:'サイレントブルーム', price:2530, pickup: true,
     img:'https://baseec-img-mng.akamaized.net/images/item/origin/fdca53c2b9f8c09cddfc600341632cc8.jpg',
     url:'https://boniquita.base.shop/items/142781605' },
-  { series:'Spice Records', name:'Rosy Nostalgia', ja:'ロージーノスタルジア', price:2530,
+  { series:'Spice Records', name:'Rosy Nostalgia', ja:'ロージーノスタルジア', price:2530, pickup: true,
     img:'https://baseec-img-mng.akamaized.net/images/item/origin/82620fb6157f40d0993424ae49a663af.jpg',
     url:'https://boniquita.base.shop/items/142781501' },
-  { series:'Spice Records', name:'Bubblegum Melody', ja:'バブルガムメロディー', price:2530,
+  { series:'Spice Records', name:'Bubblegum Melody', ja:'バブルガムメロディー', price:2530, pickup: true,
     img:'https://baseec-img-mng.akamaized.net/images/item/origin/d493feb2d156c61ee3d9899303fa9fc4.jpg',
     url:'https://boniquita.base.shop/items/142778175' },
 
@@ -1339,6 +1366,7 @@ let currentSeries = 'all';
 function getFilteredList() {
   const available = PRODUCTS.filter(p => !p.soldout);
   if (currentCat === 'all') return available;
+  if (currentCat === 'new') return available.filter(p => p.pickup);
   const seriesKeys = CATEGORIES[currentCat].map(s => s.key);
   if (currentSeries !== 'all') return available.filter(p => p.series === currentSeries);
   return available.filter(p => seriesKeys.includes(p.series));
@@ -1347,7 +1375,7 @@ function getFilteredList() {
 function renderSeriesTabs(cat) {
   const row = document.getElementById('seriesRow');
   row.innerHTML = '';
-  if (cat === 'all') return;
+  if (cat === 'all' || cat === 'new') return;
 
   const allBtn = document.createElement('button');
   allBtn.className = 'series-tab active';
@@ -1386,6 +1414,7 @@ function renderProducts() {
     card.innerHTML = `
       <a href="${p.url}" target="_blank" rel="noopener" class="card-img">
         <img src="${p.img}" alt="${p.name}" loading="lazy">
+        ${p.pickup ? '<span class="card-new-badge">New</span>' : ''}
       </a>
       <div class="card-body">
         <div class="card-series">${p.series}</div>

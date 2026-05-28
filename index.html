@@ -254,7 +254,7 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
 .hero-est .label { color: rgba(246,237,224,0.5); }
 .hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(40px, 7vw, 64px);
+  font-size: clamp(34px, 9vw, 64px);
   font-weight: 300;
   color: var(--cream-lt);
   line-height: 1.15;
@@ -267,6 +267,8 @@ nav a:hover { border-bottom-color: var(--red); color: var(--red); }
   line-height: 2; margin-bottom: 28px;
   font-family: 'Shippori Mincho', serif;
 }
+.sp-only { display: none; }
+@media (max-width: 600px) { .sp-only { display: inline; } }
 .hero-tagline {
   font-family: 'Cormorant Garamond', serif;
   font-size: 11px; letter-spacing: 0.3em;
@@ -900,7 +902,7 @@ footer nav a:hover { color: var(--red); }
     <h1>Little <em>treasures</em><br>for everyday</h1>
     <p class="hero-sub">
       ひとつひとつ手で紡ぐ、ささやかな宝飾。<br>
-      古い記憶のように、そっと寄り添うアクセサリーをお届けします。
+      古い記憶のように、そっと寄り添う<br class="sp-only">アクセサリーをお届けします。
     </p>
     <span class="hero-tagline">handmade accessories · since 2024</span>
     <a href="#shop" class="btn">Collection を見る</a>

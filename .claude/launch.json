@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "boniquita",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "--directory", "/Users/ishiguroatsuya/Documents/GitHub/Boniquita", "3457"],
+      "port": 3457
+    }
+  ]
+}
